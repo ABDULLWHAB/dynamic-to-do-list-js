@@ -4,7 +4,7 @@ let tasks = [];
 // Load tasks from Local Storage when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
-    
+
     // Get references to the DOM elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for adding tasks
     addButton.addEventListener('click', () => {
-        addTask(taskInput.value);
+        addTask();
     });
 
     // Event listener for adding tasks using the Enter key
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            addTask(taskInput.value);
+            addTask();
         }
     });
 });
@@ -30,8 +30,12 @@ function loadTasks() {
 }
 
 // Function to add a task
-function addTask(taskText, save = true) {
-    taskText = taskText.trim(); // Trim whitespace
+function addTask(save = true) {
+    // Retrieve and trim the value from the task input field
+    const taskInput = document.getElementById('task-input');
+    const taskText = taskInput.value.trim(); // Use trim() directly here
+
+    // Check if taskText is not empty
     if (taskText === "") {
         alert("Please enter a task."); // Prompt if empty
         return;
@@ -59,7 +63,7 @@ function addTask(taskText, save = true) {
     taskList.appendChild(li);
 
     // Clear the task input field
-    document.getElementById('task-input').value = '';
+    taskInput.value = '';
 
     // Save to Local Storage
     if (save) {
@@ -73,4 +77,5 @@ function removeTaskFromStorage(taskText) {
     tasks = tasks.filter(task => task !== taskText); // Remove the task from the array
     localStorage.setItem('tasks', JSON.stringify(tasks)); // Update Local Storage
 }
+
 
