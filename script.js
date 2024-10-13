@@ -50,8 +50,8 @@ function addTask(save = true) {
     // Create a new remove button
     const removeButton = document.createElement('button');
     removeButton.textContent = "Remove";
-    removeButton.className = 'remove-btn'; // Add the class 'remove-btn'
-    
+    removeButton.classList.add('remove-btn'); // Use classList.add() to add the class
+
     // Assign an onclick event to the remove button
     removeButton.onclick = () => {
         taskList.removeChild(li); // Remove the li element
@@ -77,5 +77,6 @@ function removeTaskFromStorage(taskText) {
     tasks = tasks.filter(task => task !== taskText); // Remove the task from the array
     localStorage.setItem('tasks', JSON.stringify(tasks)); // Update Local Storage
 }
+
 
 
